@@ -1,17 +1,3 @@
-// ESP8266 OTA Example
-// Target Hardware:  esp8266 NodeMCU
-//
-// Uses the ArduinoOTA library (included with ESP8266 board support) to allow sketches
-// to support firmware updates over the air (WiFi).
-// This sketch flashes an LED to show how OTA works in conjunction with a sketch.
-//
-// NodeMCU I2C Pins 
-//    LED:  D1
-//
-// Required libraries and board files:
-//    esp8266               install from boards manager
-//
-// Gadget Reboot
 
 
 #include <ESP8266WiFi.h>
@@ -25,9 +11,9 @@ const char* password = "Your Network Password";
 void setup() {
   Serial.begin(9600);
 
-  // start with led OFF
+
   pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, LOW);   
+  digitalWrite(ledPin, LOW);
 
   // join WiFi network
   Serial.println();
@@ -45,14 +31,7 @@ void setup() {
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 
-  // Port defaults to 8266
-  // ArduinoOTA.setPort(8266);
-
-  // Hostname defaults to esp8266-[ChipID]
   ArduinoOTA.setHostname("GR-ESP8266");
-
-  // No authentication by default
-  // ArduinoOTA.setPassword("admin");
 
   ArduinoOTA.onStart([]() {
     String type;
@@ -62,7 +41,7 @@ void setup() {
       type = "filesystem";
     }
 
-    // NOTE: if updating SPIFFS this would be the place to unmount SPIFFS using SPIFFS.end()
+
     Serial.println("Start updating " + type);
   });
 
@@ -88,7 +67,7 @@ void setup() {
       Serial.println("End Failed");
     }
   });
-  
+
   // initialize OTA capability
   ArduinoOTA.begin();
 }
